@@ -1,0 +1,41 @@
+Följande funktionalitet måste finnas med i applikationen för att kunna uppnå kravet för godkänt (G):
+
+    Applikationen ska vara en konsol-applikation.
+
+    Det ska vara möjligt att lägga till en kontakt i en lista med uppgifter som förnamn, efternamn, telefonnummer, e-postadress och adressinformation
+
+    Alla kontakter ska sparas ner i en fil som ska vara en .json.
+
+    När programmet startar upp ska alla kontakter som finns inlagda i filen hämtas in i programmet.
+
+    Det ska vara möjligt att lista upp samtliga kontakter på ett snyggt och prydligt sätt, som du själv bestämmer.
+
+    Det ska vara möjligt att sen detaljerad information om en specifik kontakt där information som namn, telefonnummer, e-postadress och adressinformation ska visas.
+
+    Det ska vara möjligt att kunna ta bort en kontakt genom att ange kontaktens e-postadress
+    Du ska kommentera din kod med hjälp av korta kommentarer i form av summary-kommentarer, dvs du använder dig av /// för att lägga en kommentar.
+
+    Du ska göra ett simpelt enhetstest/integrationstest och det ska ligga som ett separat projekt enligt de riktlinjer som ges under inspelningen om testning.
+
+ 
+
+Följande funktionalitet måste finnas med i applikationen för att kunna uppnå kravet för väl godkänt (VG):
+
+    Du ska ha gjort alla punkter för G-kraven, vilket inkluderar att du även ska göra en konsolapplikation.
+    Du ska göra en grafisk applikation (WPF/MAUI) som utför samma saker som för G-kraven.
+
+    Alla kontakter ska sparas ner i en fil som ska vara en .json.
+
+    När programmet startar upp ska alla kontakter som finns inlagda i filen hämtas in i programmet.
+
+    Utöver G-kravet för att lägga till, visa och ta bort en kontakt ska det även gå att uppdatera en kontakt i din grafiska applikation. Det behöver inte göras i din konsolapplikation.
+
+    Din grafiska applikation ska använda sig av olika vyer och tillämpa MVVM.
+
+    Du måste använda dig av Service Pattern.
+
+    Du ska använda dig av Dependency Injection.
+
+    Du ska kommentera din kod med hjälp av korta kommentarer i form av summary-kommentarer, dvs du använder dig av /// för att lägga en kommentar.
+
+    Du ska göra ett enhetstest/integrationstest för konsolapplikationen och du ska göra ett enhetstest/integrationstest för din grafiska applikation och det ska ligga som ett separat projekt enligt de riktlinjer som ges under inspelningen om testning.
