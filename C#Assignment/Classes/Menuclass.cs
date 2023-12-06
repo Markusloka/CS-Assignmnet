@@ -1,42 +1,41 @@
 namespace C_Assignment.Classes
 {
-    public class Menuclass;
-
+    public class Menuclass
     {
-    public void Run()
-    {
-        bool continue = true;
-
-        while (continue)
+        public static void MainMenu()
         {
-            Console.WriteLine("Enter Customer Details (1)");
-            Console.WriteLine("Enter usage data (2)");
-            Console.WriteLine("Display usage data (3)");
-            Console.WriteLine("Exit (4)");
+            bool done = true;
 
-            string menu = Console.ReadLine();
-
-            switch (menu)
+            while (done)
             {
-                case "1":
-                    //statement 
-                    break;
+                Console.WriteLine("Add Contact (1)");
+                Console.WriteLine("View Contacts (2)");
+                Console.WriteLine("Delete Contact (3)");
+                Console.WriteLine("Exit (4)");
 
-                case "2":
-                    //statement 
-                    break;
+                string menu = Console.ReadLine();
 
-                case "3":
-                    //statement 
-                    break;
+                switch (menu)
+                {
+                    case "1":
+                        //statement 
+                        break;
 
-                case "4":
-                default:
-                    continue = false;
-                    break;
+                    case "2":
+                        //statement 
+                        break;
+
+                    case "3":
+                        //statement 
+                        break;
+
+                    case "4":
+                    default:
+                        done = false;
+                        break;
+                }
             }
         }
-    }
     }
 }
 

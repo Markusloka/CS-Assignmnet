@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C_Assignment.Classes;
+using System;
 
 namespace C_Assignment // Note: actual namespace depends on the project name.
 {
@@ -6,7 +7,7 @@ namespace C_Assignment // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Menuclass.MainMenu();
         }
     }
 }
