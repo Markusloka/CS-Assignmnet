@@ -6,6 +6,7 @@ namespace C_Assignment.Classes
 {
     public class MenuService : IMenuService
     {
+        List<IContact> contactList = new List<IContact>();
         public void MainMenu()
         {
             bool done = true;
@@ -49,6 +50,8 @@ namespace C_Assignment.Classes
 
         public void AddContactOption()
         {
+            
+
             DisplayMenuTitle("Fill Contact info");
             Console.Write("Firstname: ");
             string firstName = Console.ReadLine()!;
@@ -75,7 +78,10 @@ namespace C_Assignment.Classes
 
             Console.WriteLine($"{fullName}, Has been added to your contacts ");
             Console.ReadKey();
-            IContact contact = new Contact(firstName, lastName, mail, phoneNumber, home, city, postalCode, fullName);
+            IContact contact = new Contact(firstName, lastName, mail, phoneNumber, home, city, postalCode);
+
+            contactList.Add(contact);
+
         }
 
 
@@ -83,8 +89,11 @@ namespace C_Assignment.Classes
         public void ShowContactsOption()
         {
             DisplayMenuTitle("Your Contacts, press the id to view details");
+            foreach (var contact in contactList)
+            {
+                Console.WriteLine($"{contact.FullName}");
+            }
             Console.ReadKey();
-            throw new NotImplementedException();
         }
 
         public void DeleteContactOption()
