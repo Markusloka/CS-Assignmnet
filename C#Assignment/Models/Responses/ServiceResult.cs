@@ -1,19 +1,8 @@
-﻿
+﻿using C_Assignment.Enums;
+using C_Assignment.Interfaces;
 namespace C_Assignment.Models.Responses;
-
-
-public enum ServiceResultStatus
-{
-    SUCCESS,
-    FAILED,
-    NOT_FOUND,
-    ALREADY_EXISTS,
-    CREATED,
-    UPDATED,
-    DELETED
-}
-public class ServiceResult
+public class ServiceResult : IServiceResult
 {
     public ServiceResultStatus Status { get; set; }
-    public object Result { get; set; }
+    public object result { get; set; } = null!;
 }

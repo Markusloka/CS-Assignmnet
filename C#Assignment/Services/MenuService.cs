@@ -19,6 +19,8 @@ namespace C_Assignment.Classes
                 Console.WriteLine("Delete Contact (3)");
                 Console.WriteLine("Update Contact (4)");
                 Console.WriteLine("Exit (5)");
+                Console.WriteLine();
+                Console.Write("Enter Menu Option: ");
 
                 string menu = Console.ReadLine()!;
 
@@ -41,16 +43,33 @@ namespace C_Assignment.Classes
                         break;
 
                     case "5":
+                        ShowExitApplicationOption();
+                        break;
+
                     default:
-                        done = false;
+                        Console.WriteLine("Invalid Option selected, Press any key to try again");
+                        Console.ReadKey();
                         break;
                 }
+                
+            }
+        }
+
+
+        private void ShowExitApplicationOption()
+        {
+            Console.Clear();
+            Console.Write("Are you sure you want to close this application? (y/n): ");
+            var option = Console.ReadLine() ?? "";
+
+            if (option.Equals("y", StringComparison.CurrentCultureIgnoreCase))
+            {
+                Environment.Exit(0);
             }
         }
 
         public void AddContactOption()
         {
-            
 
             DisplayMenuTitle("Fill Contact info");
             Console.Write("Firstname: ");
@@ -99,9 +118,16 @@ namespace C_Assignment.Classes
         public void DeleteContactOption()
         {
             DisplayMenuTitle("Write the full name of the contact you want to remove");
+            foreach (var contact in contactList)
+            {
+                Console.WriteLine($"{contact.FullName}");
+                
+            }
+            Console.Write("Fullname: ");
+            Console.ReadLine();
+            
             Console.ReadKey();
 
-            throw new NotImplementedException();
         }
 
         public void UpdateContactOption()
