@@ -8,14 +8,16 @@ namespace C_Assignment.Service;
 
 public class ContactService : IContactService
 {
+    private static readonly List<IContact> _contacts = [];
+
     public ServiceResult AddContactToList(Contact contact)
     {
-        throw new NotImplementedException();
+        _contacts.Add(contact);
     }
 
     public ServiceResult DeleteContactFromList(Func<Contact, bool> predicate)
     {
-        throw new NotImplementedException();
+        IContact contact = _contacts.FirstOrDefault(predicate);
     }
 
     public ServiceResult GetContactFromList(Func<Contact, bool> predicate)
