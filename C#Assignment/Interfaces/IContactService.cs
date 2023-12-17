@@ -5,11 +5,11 @@ namespace C_Assignment.Interfaces
 {
     public interface IContactService
     {
-        ServiceResult AddContactToList(Contact contact);
+        ServiceResult AddContactToList(IContact contact);
         ServiceResult DeleteContactFromList(Func<Contact, bool> predicate);
         ServiceResult GetContactFromList(Func<Contact, bool> predicate);
 
-        ServiceResult GetContactsFromlist();
+        ServiceResult GetContactsFromList( Contact contact);
         ServiceResult UpdateContactInList(Contact contact);
     }
 }

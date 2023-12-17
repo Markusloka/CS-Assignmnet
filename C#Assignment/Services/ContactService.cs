@@ -1,4 +1,5 @@
-﻿using C_Assignment.Models.Responses;
+﻿using System.Diagnostics;
+using C_Assignment.Models.Responses;
 using C_Assignment.Interfaces;
 using C_Assignment.Models;
 
@@ -8,16 +9,40 @@ namespace C_Assignment.Service;
 
 public class ContactService : IContactService
 {
-    private static readonly List<IContact> _contacts = [];
+    private static readonly List<IContact> _contacts = new List<IContact>();
 
-    public ServiceResult AddContactToList(Contact contact)
+    public ServiceResult AddContactToList(IContact contact)
     {
-        _contacts.Add(contact);
+        var response = new ServiceResult();
+        try
+        {
+            if (!_contacts.Any(x => x.Email == contact.Email))
+            {
+                _contacts.Add(contact);
+                response.Status = Enums.ServiceResultStatus.SUCCESS;
+            }
+            else
+            {
+                response.Status = Enums.ServiceResultStatus.ALREADY_EXISTS;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            response.Status = Enums.ServiceResultStatus.FAILED;
+            response.result = ex.Message;
+
+        }
+
+        return response;
+
     }
+
+    
 
     public ServiceResult DeleteContactFromList(Func<Contact, bool> predicate)
     {
-        IContact contact = _contacts.FirstOrDefault(predicate);
+        throw new NotImplementedException();
     }
 
     public ServiceResult GetContactFromList(Func<Contact, bool> predicate)
@@ -25,13 +50,29 @@ public class ContactService : IContactService
         throw new NotImplementedException();
     }
 
-    public ServiceResult GetContactsFromlist()
+    public ServiceResult GetContactsFromList(Contact contact)
     {
-        throw new NotImplementedException();
+        
+        var response = new ServiceResult();
+        try
+        {
+            response.Status = Enums.ServiceResultStatus.SUCCESS;
+            response.result = _contacts;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            response.Status = Enums.ServiceResultStatus.FAILED;
+            response.result = ex.Message;
+
+        }
+
+        return response;
+        
     }
 
     public ServiceResult UpdateContactInList(Contact contact)
     {
         throw new NotImplementedException();
     }
-}
+} 

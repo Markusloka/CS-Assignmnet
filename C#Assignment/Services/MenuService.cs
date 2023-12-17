@@ -51,6 +51,7 @@ namespace C_Assignment.Classes
                         Console.ReadKey();
                         break;
                 }
+                //1:30 i videon kolla
                 
             }
         }
