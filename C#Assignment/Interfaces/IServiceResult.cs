@@ -4,7 +4,7 @@ namespace C_Assignment.Interfaces
 {
     public interface IServiceResult
     {
-        object result { get; set; }
+        object Result { get; set; }
         ServiceResultStatus Status { get; set; }
     }
 }

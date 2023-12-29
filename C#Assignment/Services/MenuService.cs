@@ -1,14 +1,19 @@
 using C_Assignment.Interfaces;
 using C_Assignment.Models;
+using C_Assignment.Models.Responses;
+using C_Assignment.Service;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace C_Assignment.Classes
 {
     public class MenuService : IMenuService
     {
-        List<IContact> contactList = new List<IContact>();
+        private readonly IContactService _contactService = new ContactService();
+
         public void MainMenu()
         {
+            
             bool done = true;
 
             while (done)
@@ -26,6 +31,7 @@ namespace C_Assignment.Classes
 
                 switch (menu)
                 {
+                   
                     case "1":
                         AddContactOption();
                         break;
@@ -96,11 +102,28 @@ namespace C_Assignment.Classes
 
             string fullName = firstName + " " + lastName;
 
-            Console.WriteLine($"{fullName}, Has been added to your contacts ");
-            Console.ReadKey();
             IContact contact = new Contact(firstName, lastName, mail, phoneNumber, home, city, postalCode);
 
-            contactList.Add(contact);
+            var res = _contactService.AddContactToList(contact);
+
+
+            switch (res.Status)
+            {
+                case Enums.ServiceResultStatus.SUCCESS:
+                    Console.WriteLine($"{fullName}, Has been added to your contacts ");
+                    Console.ReadKey();
+                    break;
+                case Enums.ServiceResultStatus.FAILED:
+                    Console.WriteLine($"Failed to add {fullName} to your contacts ");
+                    Console.WriteLine("See error message :: " + res.Result.ToString());
+
+                    Console.ReadKey();
+                    break;
+                case Enums.ServiceResultStatus.ALREADY_EXISTS:
+                    Console.WriteLine($"{fullName}, Already exists");
+                    Console.ReadKey();
+                    break;
+            }
 
         }
 
@@ -109,25 +132,30 @@ namespace C_Assignment.Classes
         public void ShowContactsOption()
         {
             DisplayMenuTitle("Your Contacts, press the id to view details");
-            foreach (var contact in contactList)
+            var res = _contactService.GetContactsFromList();
+
+            if (res.Status == Enums.ServiceResultStatus.SUCCESS)
             {
-                Console.WriteLine($"{contact.FullName}");
+                if (res.Result is List<IContact> contactList)
+                    if (!contactList.Any())
+                {
+                    Console.WriteLine("No contacts found");
+                }
+                    else
+                    {
+                        foreach (var contact in contactList)
+                        {
+                            Console.WriteLine($"{contact.FullName}");
+                        }
+                    }      
             }
             Console.ReadKey();
         }
 
         public void DeleteContactOption()
         {
-            DisplayMenuTitle("Write the full name of the contact you want to remove");
-            foreach (var contact in contactList)
-            {
-                Console.WriteLine($"{contact.FullName}");
-                
-            }
-            Console.Write("Fullname: ");
-            Console.ReadLine();
-            
-            Console.ReadKey();
+            DisplayMenuTitle("Write the Email of the contact you want to remove");
+            throw new NotImplementedException();
 
         }
 

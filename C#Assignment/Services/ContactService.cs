@@ -2,6 +2,7 @@
 using C_Assignment.Models.Responses;
 using C_Assignment.Interfaces;
 using C_Assignment.Models;
+using C_Assignment.Services;
 
 namespace C_Assignment.Service;
 
@@ -9,11 +10,12 @@ namespace C_Assignment.Service;
 
 public class ContactService : IContactService
 {
-    private static readonly List<IContact> _contacts = new List<IContact>();
+    private static readonly List<IContact> _contacts = [];
+    private readonly FileService _fileService = new FileService(@"C:\Projects\content.txt");
 
-    public ServiceResult AddContactToList(IContact contact)
+    public IServiceResult AddContactToList(IContact contact)
     {
-        var response = new ServiceResult();
+        IServiceResult response = new ServiceResult();
         try
         {
             if (!_contacts.Any(x => x.Email == contact.Email))
@@ -30,7 +32,7 @@ public class ContactService : IContactService
         {
             Debug.WriteLine(ex.Message);
             response.Status = Enums.ServiceResultStatus.FAILED;
-            response.result = ex.Message;
+            response.Result = ex.Message;
 
         }
 
@@ -38,32 +40,20 @@ public class ContactService : IContactService
 
     }
 
-    
-
-    public ServiceResult DeleteContactFromList(Func<Contact, bool> predicate)
-    {
-        throw new NotImplementedException();
-    }
-
-    public ServiceResult GetContactFromList(Func<Contact, bool> predicate)
-    {
-        throw new NotImplementedException();
-    }
-
-    public ServiceResult GetContactsFromList(Contact contact)
+    public IServiceResult GetContactsFromList()
     {
         
-        var response = new ServiceResult();
+       IServiceResult response = new ServiceResult();
         try
         {
             response.Status = Enums.ServiceResultStatus.SUCCESS;
-            response.result = _contacts;
+            response.Result = _contacts;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
             response.Status = Enums.ServiceResultStatus.FAILED;
-            response.result = ex.Message;
+            response.Result = ex.Message;
 
         }
 
@@ -71,8 +61,36 @@ public class ContactService : IContactService
         
     }
 
-    public ServiceResult UpdateContactInList(Contact contact)
+    public IServiceResult UpdateContactInList(Contact contact)
     {
         throw new NotImplementedException();
     }
+
+
+    public IServiceResult DeleteContactFromList(Func<Contact, bool> predicate)
+    {
+
+        IServiceResult response = new ServiceResult();
+        try
+        {
+            response.Status = Enums.ServiceResultStatus.SUCCESS;
+            response.Result = _contacts;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            response.Status = Enums.ServiceResultStatus.FAILED;
+            response.Result = ex.Message;
+
+        }
+
+        return response;
+    }
+
+    public IServiceResult GetContactFromList(Func<Contact, bool> predicate)
+    {
+        throw new NotImplementedException();
+    }
+
+    
 } 
