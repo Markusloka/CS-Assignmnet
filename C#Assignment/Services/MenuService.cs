@@ -102,7 +102,7 @@ namespace C_Assignment.Classes
 
             string fullName = firstName + " " + lastName;
 
-            IContact contact = new Contact(firstName, lastName, mail, phoneNumber, home, city, postalCode);
+            Contact contact = new Contact(firstName, lastName, mail, phoneNumber, home, city, postalCode);
 
             var res = _contactService.AddContactToList(contact);
 

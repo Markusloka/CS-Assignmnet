@@ -11,7 +11,7 @@ namespace C_Assignment.Service;
 
 public class ContactService : IContactService
 {
-    private   List<IContact> _contacts = [];
+    private   List<Contact> _contacts = [];
     private  FileService _fileService = new FileService(@"C:\Projects\content.json");
 
     public IEnumerable<IContact> GetSavedContactsFromList()
@@ -22,7 +22,7 @@ public class ContactService : IContactService
             var content = _fileService.GetContentFromFile();
             if (!string.IsNullOrEmpty(content))
             {
-              _contacts = JsonConvert.DeserializeObject<List<IContact>>(content)!;
+              _contacts = JsonConvert.DeserializeObject<List<Contact>>(content)!;
             }
 
         }
@@ -44,7 +44,7 @@ public class ContactService : IContactService
         }catch (Exception ex) { Debug.WriteLine(ex.Message); }
     
     }
-    public IServiceResult AddContactToList(IContact contact)
+    public IServiceResult AddContactToList(Contact contact)
     {
         IServiceResult response = new ServiceResult();
         try
