@@ -8,7 +8,7 @@ namespace C_Assignment.Interfaces
         IServiceResult AddContactToList(IContact contact);
         IServiceResult DeleteContactFromList(Func<Contact, bool> predicate);
         IServiceResult GetContactFromList(Func<Contact, bool> predicate);
-
+      
         IServiceResult GetContactsFromList();
         IServiceResult UpdateContactInList(Contact contact);
     }

@@ -3,6 +3,7 @@ using C_Assignment.Models.Responses;
 using C_Assignment.Interfaces;
 using C_Assignment.Models;
 using C_Assignment.Services;
+using Newtonsoft.Json;
 
 namespace C_Assignment.Service;
 
@@ -10,9 +11,39 @@ namespace C_Assignment.Service;
 
 public class ContactService : IContactService
 {
-    private static readonly List<IContact> _contacts = [];
-    private readonly FileService _fileService = new FileService(@"C:\Projects\content.txt");
+    private   List<IContact> _contacts = [];
+    private  FileService _fileService = new FileService(@"C:\Projects\content.json");
 
+    public IEnumerable<IContact> GetSavedContactsFromList()
+    {
+        try
+        {
+
+            var content = _fileService.GetContentFromFile();
+            if (!string.IsNullOrEmpty(content))
+            {
+              _contacts = JsonConvert.DeserializeObject<List<IContact>>(content)!;
+            }
+
+        }
+        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+        return _contacts;
+    }
+    public void SaveContactToList (Contact contact)
+    {
+
+        try
+        {
+            if (!_contacts.Any(x => x.Email == contact.Email))
+            {
+                _contacts.Add(contact);
+                _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contacts));
+
+            }
+
+        }catch (Exception ex) { Debug.WriteLine(ex.Message); }
+    
+    }
     public IServiceResult AddContactToList(IContact contact)
     {
         IServiceResult response = new ServiceResult();
@@ -21,6 +52,8 @@ public class ContactService : IContactService
             if (!_contacts.Any(x => x.Email == contact.Email))
             {
                 _contacts.Add(contact);
+                _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contacts));
+
                 response.Status = Enums.ServiceResultStatus.SUCCESS;
             }
             else
@@ -47,7 +80,7 @@ public class ContactService : IContactService
         try
         {
             response.Status = Enums.ServiceResultStatus.SUCCESS;
-            response.Result = _contacts;
+            response.Result = GetSavedContactsFromList();
         }
         catch (Exception ex)
         {
@@ -92,5 +125,7 @@ public class ContactService : IContactService
         throw new NotImplementedException();
     }
 
+
+   
     
 } 

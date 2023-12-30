@@ -136,7 +136,7 @@ namespace C_Assignment.Classes
 
             if (res.Status == Enums.ServiceResultStatus.SUCCESS)
             {
-                if (res.Result is List<IContact> contactList)
+                if (res.Result is IEnumerable<IContact> contactList)
                     if (!contactList.Any())
                 {
                     Console.WriteLine("No contacts found");
